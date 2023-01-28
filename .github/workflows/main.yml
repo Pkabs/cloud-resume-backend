@@ -37,7 +37,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Update Lambda function
-      uses: aws-actions/lambda-update-function@v1
+      uses: aws-actions/lambda-deploy-function@v1
       with:
         function-name: CloudResumeLambda
         zip-file: function.zip
