@@ -1,21 +1,43 @@
-name: deploy to lambda
+name: Deploy to Lambda
+
 on:
   push:
     branches:
-      - main	  
+      - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-      
+
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: default deploy
-      uses: appleboy/lambda-action@master
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: CloudResumeLambda
-          source: LambdaFunction.py
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Package function
+      run: |
+        pip install -r requirements.txt -t .
+        zip -r function.zip *
+
+    - name: Deploy to Lambda
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Update Lambda function
+      uses: aws-actions/lambda-update-function@v1
+      with:
+        function-name: CloudResumeLambda
+        zip-file: function.zip
