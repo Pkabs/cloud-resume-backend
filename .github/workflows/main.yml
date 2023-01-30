@@ -23,10 +23,12 @@ jobs:
     #     source venv/bin/activate
     #     pip install -r requirements.txt
 
+    # pip install -r requirements.txt -t .
+
     - name: Package function
       run: |
-        pip install -r requirements.txt -t .
-        zip -r function.zip *
+          
+          zip -r function.zip *
 
     - name: default deploy
       uses: appleboy/lambda-action@master
