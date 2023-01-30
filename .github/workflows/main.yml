@@ -24,11 +24,12 @@ jobs:
     #     pip install -r requirements.txt
 
     # pip install -r requirements.txt -t .
+    # ip -r function.zip *
 
     - name: Package function
       run: |
           
-          zip -r function.zip lambda_function
+          zip function.zip lambda_function.py
 
     - name: default deploy
       uses: appleboy/lambda-action@master
