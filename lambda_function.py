@@ -2,8 +2,6 @@ import boto3
 import os
 import json
 
-#ddbName = os.environ["dbName"] get table name from Environment Variables
-
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('visitor_stats')
 
