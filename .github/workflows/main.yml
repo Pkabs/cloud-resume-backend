@@ -34,7 +34,7 @@ jobs:
 
     - name: Deploy to S3
       run : |
-          aws s3 sync function.zip s3://lambda-bucket --exclude ".git/*"
+          aws s3 sync function.zip s3://resume-lambda-bucket --exclude ".git/*"
 
     # - name: Deploy Function
     #   uses: appleboy/lambda-action@master
