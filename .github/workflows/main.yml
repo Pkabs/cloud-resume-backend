@@ -27,6 +27,9 @@ jobs:
     # zip function.zip lambda_function.py
     # zip -r function.zip *
 
+    - name: Install zip
+      run: sudo apt-get update && sudo apt-get install zip
+
     - name: Package function
       run: |
           
