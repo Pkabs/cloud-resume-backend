@@ -27,7 +27,7 @@ jobs:
     # zip function.zip lambda_function.py
     # zip -r function.zip *
 
-   - name: Package function
+    - name: Package function
       run: |
           
           zip function.zip lambda_function.py
