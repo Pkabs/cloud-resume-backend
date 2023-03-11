@@ -31,9 +31,6 @@ jobs:
       run : |
           zip function.zip lambda_function.py
 
-    - name: Check zip file
-      run : ls -lrt
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
@@ -41,23 +38,18 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Check credentials
-      run : |
-          echo ${{ secrets.AWS_ACCESS_KEY_ID }}
-          echo ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
     - name: Install AWS CLI
       run : sudo apt-get install awscli -y
 
-    - name: Deploy to S3
+    - name: Deploy to S3 Bucket
       run : |
           aws s3 cp ./function.zip s3://resume-lambda-bucket --exclude ".git/*"
 
-    # - name: Deploy Function
-    #   uses: appleboy/lambda-action@master
-    #   with:
-    #       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #       aws_region: ${{ secrets.AWS_REGION }}
-    #       function_name: CloudResumeLambda
-    #       zip_file: function.zip
+    - name: Deploy to Lambda Function
+      uses: appleboy/lambda-action@master
+      with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: resume-lambda-bucket
+          zip_file: function.zip
