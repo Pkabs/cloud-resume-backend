@@ -3,7 +3,7 @@ import os
 import json
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('visitor_stats')
+table = dynamodb.Table('TerraVisitorStatsTable')
 
 #Get count funtion that gets and returns the latest value
 def get_count():
