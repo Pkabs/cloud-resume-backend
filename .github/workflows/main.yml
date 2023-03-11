@@ -33,13 +33,18 @@ jobs:
 
     - name: Check zip file
       run : ls -lrt
+
+    - name: Check credentials
+      run : |
+          echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+          echo ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           
     - name: Install AWS CLI
       run : sudo apt-get install awscli -y
 
-    - name: Deploy to S3
-      run : |
-          aws s3 cp ./function.zip  s3://resume-lambda-bucket --exclude ".git/*"
+    # - name: Deploy to S3
+    #   run : |
+    #       aws s3 cp ./function.zip  s3://resume-lambda-bucket --exclude ".git/*"
 
     # - name: Deploy Function
     #   uses: appleboy/lambda-action@master
