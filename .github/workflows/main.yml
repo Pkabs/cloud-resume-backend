@@ -30,7 +30,9 @@ jobs:
     - name: Package function
       run : |
           zip function.zip lambda_function.py
-          ls function.zip
+          
+    - name: Check zip file
+      run : ls function.zip
           
     - name: Install AWS CLI
       run : sudo apt-get install awscli -y
