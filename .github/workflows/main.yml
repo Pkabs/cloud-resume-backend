@@ -32,11 +32,15 @@ jobs:
           
           zip function.zip lambda_function.py
 
-    - name: Deploy Function
-      uses: appleboy/lambda-action@master
-      with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: CloudResumeLambda
-          zip_file: function.zip
+    - name: Deploy to S3
+      run : |
+          aws s3 sync function.zip s3://lambda-bucket --exclude ".git/*"
+
+    # - name: Deploy Function
+    #   uses: appleboy/lambda-action@master
+    #   with:
+    #       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #       aws_region: ${{ secrets.AWS_REGION }}
+    #       function_name: CloudResumeLambda
+    #       zip_file: function.zip
