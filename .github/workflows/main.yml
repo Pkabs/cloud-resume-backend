@@ -31,6 +31,9 @@ jobs:
       run: |
           
           zip function.zip lambda_function.py
+          
+    - name: Install AWS CLI
+      run: sudo apt-get install awscli -y
 
     - name: Deploy to S3
       run : |
