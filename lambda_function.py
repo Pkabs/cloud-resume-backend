@@ -22,7 +22,8 @@ def lambda_handler(event, context):
     response = {
         'statusCode': 200,
         'headers': {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'https://resume.peterkabira.com'
         },
         'body': get_count()
     }
