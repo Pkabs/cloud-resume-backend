@@ -19,7 +19,14 @@ def lambda_handler(event, context):
         'record_id':'resumesite',
         'visitor_count': new_visitor_count,    
     })
-    return new_visitor_count
+    response = {
+        'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+        'body': get_count()
+    }
+    return response
     
 
 """ 
