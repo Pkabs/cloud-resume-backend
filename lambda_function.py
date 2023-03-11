@@ -12,7 +12,7 @@ def get_count():
     print(count)
     return count
 
-#Increment the fetched value & update table --test
+#Increment the fetched value & update table
 def lambda_handler(event, context):
     new_visitor_count = get_count() + 1
     updateItem = table.put_item(Item={
