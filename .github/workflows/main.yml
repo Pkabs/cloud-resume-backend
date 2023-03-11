@@ -49,9 +49,9 @@ jobs:
     - name: Install AWS CLI
       run : sudo apt-get install awscli -y
 
-    # - name: Deploy to S3
-    #   run : |
-    #       aws s3 cp ./function.zip  s3://resume-lambda-bucket --exclude ".git/*"
+    - name: Deploy to S3
+      run : |
+          aws s3 sync function.zip s3://resume-lambda-bucket --exclude ".git/*"
 
     # - name: Deploy Function
     #   uses: appleboy/lambda-action@master
