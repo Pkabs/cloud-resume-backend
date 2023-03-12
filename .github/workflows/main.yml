@@ -45,11 +45,11 @@ jobs:
       run : |
           aws s3 cp ./function.zip s3://resume-lambda-bucket --exclude ".git/*"
 
-    - name: Deploy to Lambda Function
-      uses: appleboy/lambda-action@master
-      with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: TerraCloudResumeLambda
-          zip_file: function.zip
+    # - name: Deploy to Lambda Function
+    #   uses: appleboy/lambda-action@master
+    #   with:
+    #       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #       aws_region: ${{ secrets.AWS_REGION }}
+    #       function_name: TerraCloudResumeLambda
+    #       zip_file: function.zip
